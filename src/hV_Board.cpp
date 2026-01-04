@@ -8,8 +8,8 @@
 //
 // Created by Rei Vilo, 16 Aug 2023
 //
-// Copyright (c) Pervasive Displays Inc., 2021-2025
-// Copyright (c) Etigues, 2010-2025
+// Copyright (c) Pervasive Displays Inc., 2021-2026
+// Copyright (c) Etigues, 2010-2026
 // Licence All rights reserved
 // For exclusive use with Pervasive Displays screens
 //
