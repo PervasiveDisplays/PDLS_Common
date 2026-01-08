@@ -21,6 +21,7 @@
 // Release 900: Consolidated constants
 // Release 906: Added check for panel power
 // Release 1000: Unified boards definition
+// Release 1002: Added extra delays before commands
 //
 
 // Library header
@@ -319,6 +320,9 @@ void hV_Board::b_select(uint8_t select)
 
 void hV_Board::b_sendCommandDataSelect8(uint8_t command, uint8_t data, uint8_t select)
 {
+    // For an unknown reason, extra delay required for some MCUs
+    hV_HAL_delayMilliseconds(1); // Ensure minimum timing
+
     hV_HAL_GPIO_clear(b_pin.panelDC); // LOW = command
     b_select(select); // Select half of large screen
 
@@ -336,6 +340,9 @@ void hV_Board::b_sendCommandDataSelect8(uint8_t command, uint8_t data, uint8_t s
 
 void hV_Board::b_sendCommand8(uint8_t command)
 {
+    // For an unknown reason, extra delay required for some MCUs
+    hV_HAL_delayMilliseconds(1); // Ensure minimum timing
+
     hV_HAL_GPIO_clear(b_pin.panelDC);
     hV_HAL_GPIO_clear(b_pin.panelCS);
 
@@ -346,6 +353,9 @@ void hV_Board::b_sendCommand8(uint8_t command)
 
 void hV_Board::b_sendCommandData8(uint8_t command, uint8_t data)
 {
+    // For an unknown reason, extra delay required for some MCUs
+    hV_HAL_delayMilliseconds(1); // Ensure minimum timing
+
     hV_HAL_GPIO_clear(b_pin.panelDC); // LOW = command
     hV_HAL_GPIO_clear(b_pin.panelCS);
 
