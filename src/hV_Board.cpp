@@ -22,6 +22,7 @@
 // Release 906: Added check for panel power
 // Release 1000: Unified boards definition
 // Release 1002: Added extra delays before commands
+// Release 1003: Added support for BWRY large screens
 //
 
 // Library header
@@ -254,6 +255,23 @@ void hV_Board::b_sendIndexData(uint8_t index, const uint8_t * data, uint32_t siz
 }
 
 // Software SPI Master protocol setup
+void hV_Board::b_sendCommandSelect8(uint8_t command, uint8_t select)
+{
+    // For an unknown reason, extra delay required for some MCUs
+    hV_HAL_delayMilliseconds(1); // Ensure minimum timing
+
+    hV_HAL_GPIO_clear(b_pin.panelDC); // LOW = command
+    b_select(select); // Select half of large screen
+
+    hV_HAL_SPI_transfer(command);
+
+    hV_HAL_GPIO_set(b_pin.panelCS);
+    if (b_pin.panelCSS != NOT_CONNECTED)
+    {
+        hV_HAL_GPIO_set(b_pin.panelCSS);
+    }
+}
+
 void hV_Board::b_sendIndexDataSelect(uint8_t index, const uint8_t * data, uint32_t size, uint8_t select)
 {
     hV_HAL_GPIO_clear(b_pin.panelDC); // DC Low = Command

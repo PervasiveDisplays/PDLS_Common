@@ -7,8 +7,8 @@
 ///
 /// * Edition: Advanced
 ///
-/// @date 21 Jan 2026
-/// @version 1002
+/// @date 21 Feb 2026
+/// @version 1003
 ///
 /// @copyright (c) Pervasive Displays Inc., 2021-2026
 /// @copyright (c) Etigues, 2010-2026
@@ -59,7 +59,7 @@
 ///
 /// @brief Library release number
 ///
-#define hV_BOARD_RELEASE 1002
+#define hV_BOARD_RELEASE 1003
 
 // Objects
 //
@@ -146,7 +146,7 @@ class hV_Board
     /// @brief Wait for ready
     /// @details Wait for panelBusy signal to reach state
     /// @note Signal is busy until reaching state
-    /// @param state to reach HIGH = default, LOW
+    /// @param state to reach `HIGH` = default, `LOW`
     ///
     void b_waitBusy(bool state = HIGH);
 
@@ -156,6 +156,14 @@ class hV_Board
     /// @note panelDC is kept high, to be changed manually after
     ///
     void b_sendCommand8(uint8_t command);
+
+    ///
+    /// @brief Send a command to selected half of large screen
+    /// @param command command
+    /// @param select default = `PANEL_CS_BOTH`, otherwise `PANEL_CS_MASTER` or `PANEL_CS_SLAVE`
+    /// @note panelDC is kept high, to be changed manually after
+    ///
+    void b_sendCommandSelect8(uint8_t command, uint8_t select = PANEL_CS_BOTH);
 
     ///
     /// @brief Send a command and ane byte of data
@@ -169,7 +177,7 @@ class hV_Board
     /// @brief Send a command and one byte of data to selected half of large screen
     /// @param command command
     /// @param data uint8_t data
-    /// @param select default = PANEL_CS_BOTH, otherwise PANEL_CS_MASTER or PANEL_CS_SLAVE
+    /// @param select default = `PANEL_CS_BOTH`, otherwise `PANEL_CS_MASTER` or `PANEL_CS_SLAVE`
     /// @note panelDC is kept high, to be changed manually after
     ///
     void b_sendCommandDataSelect8(uint8_t command, uint8_t data, uint8_t select = PANEL_CS_BOTH);
@@ -194,7 +202,7 @@ class hV_Board
   private:
 
     /// @brief Select one half of large screens
-    /// @param select default = PANEL_CS_BOTH, otherwise PANEL_CS_MASTER or PANEL_CS_SLAVE
+    /// @param select default = `PANEL_CS_BOTH`, otherwise `PANEL_CS_MASTER` or `PANEL_CS_SLAVE`
     /// @note Valid only for 9.69 and 11.98" screens
     ///
     void b_select(uint8_t select = PANEL_CS_BOTH);

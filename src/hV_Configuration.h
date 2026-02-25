@@ -119,7 +119,7 @@
 #include "hV_List_Options.h"
 
 #if (hV_LIST_OPTIONS_RELEASE < 1000)
-#error Required hV_LIST_OPTIONS_ERELEASE 1000
+#error Required hV_LIST_OPTIONS_RELEASE 1000
 #endif // hV_LIST_OPTIONS_RELEASE
 
 #endif // hV_CONFIGURATION_RELEASE

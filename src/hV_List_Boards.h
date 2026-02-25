@@ -441,7 +441,7 @@ const pins_t boardRaspberryPiPico_RP2040_EXT4 =
 const pins_t boardParticlePhoton2 =
 {
     .scope = BOARD_EXT3, ///< EXT3, EXT3.1
-    
+
     // ///< EXT3.1 pin 1 Black -> +3.3V
     // ///< EXT3.1 pin 2 Brown -> SPI SCK
     .panelBusy = 5, ///< EXT3.1 pin 3 Red -> D5
