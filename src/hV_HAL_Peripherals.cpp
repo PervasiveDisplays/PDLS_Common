@@ -96,7 +96,7 @@ void hV_HAL_begin()
     //     // SPI.begin(14, 12, 13); // SCK MISO MOSI
     //     hV_HAL_SPI3_define(14, 13); // SCK SDA=MOSI
     //
-    // #if defined(DARDUINO_ARCH_ESP32)
+    // #if defined(ARDUINO_ARCH_ESP32)
     //
     //     // Other ESP32 boards crash if pins are not specified.
     //     // SPI.begin(14, 12, 13); // SCK MISO MOSI
@@ -200,13 +200,13 @@ void hV_HAL_SPI_begin(uint32_t speed)
         //         // Board ESP32-Pico-DevKitM-2 crashes if pins are not specified.
         //         SPI.begin(14, 12, 13); // SCK MISO MOSI
         //
-        // #elif defined(DARDUINO_ARCH_ESP32)
+        // #elif defined(ARDUINO_ARCH_ESP32)
         //
         //         // Other ESP32 boards crash if pins are not specified.
         //         SPI.begin(14, 12, 13); // SCK MISO MOSI
         //         // hV_HAL_SPI3_define(14, 13); // SCK SDA=MOSI
 
-#if defined(DARDUINO_ARCH_ESP32)
+#if defined(ARDUINO_ARCH_ESP32)
 
         // ESP32 boards crash if pins are not specified.
         SPI.begin(SCK, MISO, MOSI); // SCK MISO MOSI
