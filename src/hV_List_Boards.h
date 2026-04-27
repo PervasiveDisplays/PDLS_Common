@@ -14,8 +14,8 @@
 ///     * 2.5 Recommended boards for Viewer
 ///     * 2.6 Deprecated boards
 ///
-/// @date 21 Dec 2025
-/// @version 1001
+/// @date 21 Apr 2026
+/// @version 1005
 ///
 /// @copyright (c) Pervasive Displays Inc., 2021-2026
 /// @copyright (c) Etigues, 2010-2026
@@ -55,7 +55,7 @@
 ///
 /// @brief Release
 ///
-#define hV_LIST_BOARDS_RELEASE 1000
+#define hV_LIST_BOARDS_RELEASE 1005
 
 ///
 /// @brief Not connected pin
@@ -65,25 +65,24 @@
 ///
 /// @brief EXT board configuration structure
 /// @note
-/// * Pins 1 to 10 are common to all EXT boards
+/// * Pins 1 to 10 except pin 8 are common to all EXT boards
 /// * Other pins are specific to each EXT board, optional or external
 ///
 struct pins_t
 {
-    // Shared
     uint8_t scope; ///< BOARD_EXT3 or BOARD_EXT4
 
     // Common
-    // ///< EXT3 and EXT3.1 pin 1 Black -> +3.3V
-    // ///< EXT3 and EXT3.1 pin 2 Brown -> SPI SCK
-    uint8_t panelBusy; ///< EXT3 and EXT3.1 pin 3 Red
-    uint8_t panelDC; ///< EXT3 and EXT3.1 pin 4 Orange
-    uint8_t panelReset; ///< EXT3 and EXT3.1 pin 5 Yellow
-    // ///< EXT3 and EXT3.1 pin 6 Green -> SPI MISO
-    // ///< EXT3 and EXT3.1 pin 7 Blue -> SPI MOSI
-    uint8_t flashCS; ///< EXT3 and EXT3.1 pin 8 Violet
-    uint8_t panelCS; ///< EXT3 and EXT3.1 pin 9 Grey
-    // ///< EXT3 and EXT3.1 pin 10 White -> GROUND
+    // ///< All EXT* pin 1 Black -> +3.3V
+    // ///< All EXT* pin 2 Brown -> SPI SCK
+    uint8_t panelBusy; ///< All EXT* pin 3 Red
+    uint8_t panelDC; ///< All EXT3 pin 4 Orange
+    uint8_t panelReset; ///< All EXT3 pin 5 Yellow
+    // ///< All EXT* pin 6 Green -> SPI MISO
+    // ///< All EXT* pin 7 Blue -> SPI MOSI
+    uint8_t flashCS; ///< All EXT* except EXT3.2 pin 8 Violet
+    uint8_t panelCS; ///< All EXT* pin 9 Grey
+    // ///< All EXT* pin 10 White -> GROUND
     // End of Common
 
     // EXT3, EXT3.1 and EXT3-Touch, EXT4 specific
@@ -93,14 +92,13 @@ struct pins_t
     // ///< EXT3-Touch pin 2 Black -> I2C SCL
     uint8_t touchInt; ///< EXT3-Touch pin 3 Red
     uint8_t touchReset; ///< EXT3-Touch pin 4 Orange
-    uint8_t panelPower; ///< Optional power circuit
+    uint8_t panelPower; ///< Optional EXT3.2 and EXT4 power circuit
     // End of EXT3, EXT3.1 and EXT3-Touch specific
 
     // External SD-card
     uint8_t cardCS; ///< External SD-card board
     uint8_t cardDetect; ///< External SD-card board
     // End of External SD-card
-    // End of Shared
 
     // EXT4 specific
     uint8_t button; ///< EXT4 pin 12 Grey
@@ -125,7 +123,7 @@ struct pins_t
 ///
 /// @{
 #define BOARD_EXT2 0x20 ///< EXT2 board
-#define BOARD_EXT3 0x30 ///< EXT3 and EXT3.1 boards
+#define BOARD_EXT3 0x30 ///< EXT3, EXT3.1 and EXT3.2 boards
 #define BOARD_EXT4 0x40 ///< EXT4 board
 /// @}
 
@@ -141,25 +139,25 @@ struct pins_t
 ///
 const pins_t boardRaspberryPiPico_RP2040 =
 {
-    .scope = BOARD_EXT3, ///< EXT3, EXT3.1
+    .scope = BOARD_EXT3, ///< Extension boards EXT3, EXT3.1, EXT3.2
 
-    ///< EXT3 and EXT3.1 pin 1 Black -> +3.3V
-    // .spiSCK = 18, ///< EXT3 and EXT3.1 pin 2 Brown -> SPI SCK GP18
-    .panelBusy = 13, ///< EXT3 and EXT3.1 pin 3 Red -> GP13
-    .panelDC = 12, ///< EXT3 and EXT3.1 pin 4 Orange -> GP12
-    .panelReset = 11, ///< EXT3 and EXT3.1 pin 5 Yellow -> GP11
-    // .spiMISO = 16, ///< EXT3 and EXT3.1 pin 6 Green -> SPI MISO or NC GP16
-    // .spiMOSI = 19, ///< EXT3 and EXT3.1 pin 7 Blue -> SPI MOSI or SDIO GP19
-    .flashCS = 10, ///< EXT3 and EXT3.1 pin 8 Violet -> GP10
-    .panelCS = 17, ///< EXT3 and EXT3.1 pin 9 Grey -> GP17
+    ///< All EXT* pin 1 Black -> +3.3V
+    // .spiSCK = 18, ///< All EXT* pin 2 Brown -> SPI SCK GP18
+    .panelBusy = 13, ///< EXT* pin 3 Red -> GP13
+    .panelDC = 12, ///< EXT* pin 4 Orange -> GP12
+    .panelReset = 11, ///< EXT* pin 5 Yellow -> GP11
+    // .spiMISO = 16, ///< All EXT* pin 6 Green -> SPI MISO or NC GP16
+    // .spiMOSI = 19, ///< All EXT* pin 7 Blue -> SPI MOSI or SDIO GP19
+    .flashCS = 10, ///< All EXT* except EXT3.2 pin 8 Violet -> GP10
+    .panelCS = 17, ///< All EXT* pin 9 Grey -> GP17
     .panelCSS = 14, ///< EXT3 and EXT3.1 pin 12 Grey2 -> GP14
     .flashCSS = 15, ///< EXT3 pin 20 or EXT3.1 pin 11 Black2 -> GP15
-    ///< EXT3 and EXT3.1 pin 10 White -> GROUND
+    ///< All EXT* pin 10 White -> GROUND
     // .i2cSDA = 5, ///< EXT3-Touch pin 1 Brown -> I2C SDA GP5
     // .i2cSCL = 4, ///< EXT3-Touch pin 2 Black -> I2C SCL GP4
     .touchInt = 2, ///< EXT3-Touch pin 3 Red -> GP2
     .touchReset = 3, ///< EXT3-Touch pin 4 Orange -> GP3
-    .panelPower = NOT_CONNECTED, ///< Optional power circuit
+    .panelPower = NOT_CONNECTED, ///< Optional EXT3.2 and EXT4 power circuit
     .cardCS = NOT_CONNECTED, ///< External SD-card board
     .cardDetect = NOT_CONNECTED, ///< External SD-card board
 
@@ -197,13 +195,13 @@ const pins_t boardRaspberryPiPico2_RP2350_EXT3 = boardRaspberryPiPico_RP2040_EXT
 ///
 const pins_t boardArduinoNanoMatter =
 {
-    .scope = BOARD_EXT3, ///< EXT3, EXT3.1
+    .scope = BOARD_EXT3, ///< Extension boards EXT3, EXT3.1, EXT3.2
 
-    .panelBusy = 10, ///< EXT3 and EXT3.1 pin 3 Red -> D10
-    .panelDC = 9, ///< EXT3 and EXT3.1 pin 4 Orange -> D9
-    .panelReset = 8, ///< EXT3 and EXT3.1 pin 5 Yellow -> D8
-    .flashCS = 7, ///< EXT3 and EXT3.1 pin 8 Violet -> D7
-    .panelCS = 6, ///< EXT3 and EXT3.1 pin 9 Grey -> D6
+    .panelBusy = 10, ///< All EXT* pin 3 Red -> D10
+    .panelDC = 9, ///< All EXT* pin 4 Orange -> D9
+    .panelReset = 8, ///< All EXT* pin 5 Yellow -> D8
+    .flashCS = 7, ///< All EXT* pin 8 Violet -> D7
+    .panelCS = 6, ///< All EXT* pin 9 Grey -> D6
     .panelCSS = NOT_CONNECTED, ///< EXT3 and EXT3.1 pin 12 Grey2
     .flashCSS = NOT_CONNECTED, ///< EXT3 pin 20 or EXT3.1 pin 11 Black2
     .touchInt = NOT_CONNECTED, ///< EXT3-Touch pin 3 Red
@@ -230,13 +228,13 @@ const pins_t boardArduinoNanoMatter_EXT3 = boardArduinoNanoMatter;
 ///
 const pins_t boardFeatherNRF52840 =
 {
-    .scope = BOARD_EXT3, ///< EXT3, EXT3.1
+    .scope = BOARD_EXT3, ///< Extension boards EXT3, EXT3.1, EXT3.2
 
-    .panelBusy = 13, ///< EXT3 and EXT3.1 pin 3 Red -> D13 GPIO13
-    .panelDC = 12, ///< EXT3 and EXT3.1 pin 4 Orange -> D12 GPIO12
-    .panelReset = 11, ///< EXT3 and EXT3.1 pin 5 Yellow -> D11 GPIO11
-    .flashCS = 10, ///< EXT3 and EXT3.1 pin 8 Violet -> D10 GPIO10
-    .panelCS = 9, ///< EXT3 and EXT3.1 pin 9 Grey -> D9 GPIO9
+    .panelBusy = 13, ///< All EXT* pin 3 Red -> D13 GPIO13
+    .panelDC = 12, ///< All EXT* pin 4 Orange -> D12 GPIO12
+    .panelReset = 11, ///< All EXT* pin 5 Yellow -> D11 GPIO11
+    .flashCS = 10, ///< All EXT* except EXT3.2 pin 8 Violet -> D10 GPIO10
+    .panelCS = 9, ///< All EXT* pin 9 Grey -> D9 GPIO9
     .panelCSS = NOT_CONNECTED, ///< EXT3 and EXT3.1 pin 12 Grey2
     .flashCSS = NOT_CONNECTED, ///< EXT3 pin 20 or EXT3.1 pin 11 Black2
     .touchInt = 5, ///< EXT3-Touch pin 3 Red -> D5 GPIO5
@@ -265,20 +263,20 @@ const pins_t boardFeatherNRF52840_EXT3 = boardFeatherNRF52840;
 ///
 const pins_t boardESP32DevKitC =
 {
-    .scope = BOARD_EXT3, ///< EXT3, EXT3.1
+    .scope = BOARD_EXT3, ///< Extension boards EXT3, EXT3.1, EXT3.2
 
-    ///< EXT3 and EXT3.1 pin 1 Black -> +3.3V
-    ///< EXT3 and EXT3.1 pin 2 Brown -> SPI SCK GPIO14
-    .panelBusy = 27, ///< EXT3 and EXT3.1 pin 3 Red -> GPIO27
-    .panelDC = 26, ///< EXT3 and EXT3.1 pin 4 Orange -> GPIO26
-    .panelReset = 25, ///< EXT3 and EXT3.1 pin 5 Yellow -> GPIO25
-    ///< EXT3 and EXT3.1 pin 6 Green -> SPI MISO GPIO12
-    ///< EXT3 and EXT3.1 pin 7 Blue -> SPI MOSI GPIO13
-    .flashCS = 33, ///< EXT3 and EXT3.1 pin 8 Violet -> GPIO33
-    .panelCS = 32, ///< EXT3 and EXT3.1 pin 9 Grey -> GPIO32
+    ///< All EXT* pin 1 Black -> +3.3V
+    ///< All EXT* pin 2 Brown -> SPI SCK GPIO14
+    .panelBusy = 27, ///< All EXT* pin 3 Red -> GPIO27
+    .panelDC = 26, ///< All EXT* pin 4 Orange -> GPIO26
+    .panelReset = 25, ///< All EXT* pin 5 Yellow -> GPIO25
+    ///< All EXT* pin 6 Green -> SPI MISO GPIO12
+    ///< All EXT* pin 7 Blue -> SPI MOSI GPIO13
+    .flashCS = 33, ///< All EXT* except EXT3.2 pin 8 Violet -> GPIO33
+    .panelCS = 32, ///< All EXT* pin 9 Grey -> GPIO32
     .panelCSS = 4, ///< EXT3 and EXT3.1 pin 12 Grey2 -> GPIO4
     .flashCSS = 0, ///< EXT3 pin 20 or EXT3.1 pin 11 Black2 -> GPIO0
-    ///< EXT3 and EXT3.1 pin 10 White -> GROUND
+    ///< All EXT* pin 10 White -> GROUND
     ///< EXT3-Touch pin 1 Brown -> I2C SDA GPIO21
     ///< EXT3-Touch pin 2 Black -> I2C SCL GPIO22
     .touchInt = 10, ///< EXT3-Touch pin 3 Red -> GPIO10
@@ -315,11 +313,11 @@ const pins_t boardArduinoNanoMatter_EXT4 =
 {
     .scope = BOARD_EXT4, ///< EXT4
 
-    .panelBusy = 10, ///< EXT3 and EXT3.1 pin 3 Red -> D10
-    .panelDC = 9, ///< EXT3 and EXT3.1 pin 4 Orange -> D9
-    .panelReset = 8, ///< EXT3 and EXT3.1 pin 5 Yellow -> D8
-    .flashCS = 7, ///< EXT3 and EXT3.1 pin 8 Violet -> D7
-    .panelCS = 6, ///< EXT3 and EXT3.1 pin 9 Grey -> D6
+    .panelBusy = 10, ///< All EXT* pin 3 Red -> D10
+    .panelDC = 9, ///< All EXT* pin 4 Orange -> D9
+    .panelReset = 8, ///< All EXT* pin 5 Yellow -> D8
+    .flashCS = 7, ///< All EXT* except EXT3.2 pin 8 Violet -> D7
+    .panelCS = 6, ///< All EXT* pin 9 Grey -> D6
 
     .panelCSS = NOT_CONNECTED, ///< EXT4 not available
     .flashCSS = 5, ///< EXT3 pin 20 or EXT3.1 pin 11 Black2 -> D5
@@ -358,11 +356,11 @@ const pins_t boardSiLabsBG24Explorer_EXT4 =
 {
     .scope = BOARD_EXT4, ///< EXT4
 
-    .panelBusy = 4, ///< EXT3 and EXT3.1 pin 3 Red -> PC03 D4 4
-    .panelDC = 5, ///< EXT3 and EXT3.1 pin 4 Orange -> PC06 D5 5
-    .panelReset = 6, ///< EXT3 and EXT3.1 pin 5 Yellow -> PB00 D6 6
-    .flashCS = NOT_CONNECTED, ///< EXT3 and EXT3.1 pin 8 Violet
-    .panelCS = 13, ///< EXT3 and EXT3.1 pin 9 Grey -> PB03 A6 13
+    .panelBusy = 4, ///< All EXT* pin 3 Red -> PC03 D4 4
+    .panelDC = 5, ///< All EXT* pin 4 Orange -> PC06 D5 5
+    .panelReset = 6, ///< All EXT* pin 5 Yellow -> PB00 D6 6
+    .flashCS = NOT_CONNECTED, ///< All EXT* except EXT3.2 pin 8 Violet
+    .panelCS = 13, ///< All EXT* pin 9 Grey -> PB03 A6 13
     .panelCSS = NOT_CONNECTED, ///< EXT4 not available
     .flashCSS = NOT_CONNECTED, ///< EXT3 pin 20 or EXT3.1 pin 11 Black2
     .touchInt = NOT_CONNECTED, ///< EXT4 not available
@@ -395,10 +393,10 @@ const pins_t boardRaspberryPiPico_RP2040_EXT4 =
 {
     .scope = BOARD_EXT4, ///< EXT4
 
-    .panelBusy = 13, ///< EXT3 and EXT3.1 pin 3 Red -> GP13
-    .panelDC = 12, ///< EXT3 and EXT3.1 pin 4 Orange -> GP12
-    .panelReset = 11, ///< EXT3 and EXT3.1 pin 5 Yellow -> GP11
-    .flashCS = 10, ///< EXT3 and EXT3.1 pin 8 Violet -> GP10
+    .panelBusy = 13, ///< All EXT* pin 3 Red -> GP13
+    .panelDC = 12, ///< All EXT* pin 4 Orange -> GP12
+    .panelReset = 11, ///< All EXT* pin 5 Yellow -> GP11
+    .flashCS = 10, ///< All EXT* except EXT3.2 pin 8 Violet -> GP10
 
     .panelCS = 17, ///< EXT4 pin 9 Grey -> GP17
     .panelCSS = NOT_CONNECTED, ///< EXT4 not available
