@@ -64,7 +64,7 @@
 ///
 /// @brief Library release number
 ///
-#define hV_UTILITIES_RELEASE 1000
+#define hV_UTILITIES_RELEASE 1001
 
 ///
 /// @name Orientation constants

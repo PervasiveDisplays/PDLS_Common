@@ -17,6 +17,7 @@
 // Release 902: Improved stability
 // Release 906: Added fixes for GCC errors
 // Release 912: Added temperature functions to driver
+// Release 1000: Updated to PDLS release 1000
 //
 
 #include "Driver_EPD_Virtual.h"

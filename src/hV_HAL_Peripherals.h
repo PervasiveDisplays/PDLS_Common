@@ -2,7 +2,8 @@
 /// @file hV_HAL_Peripherals.h
 /// @brief Light hardware abstraction layer for peripherals
 ///
-/// @details Based on highView technology
+/// @details Project Pervasive Displays Library Suite
+/// @n Based on highView technology
 ///
 /// @date 21 Dec 2025
 /// @version 1001
@@ -99,6 +100,17 @@
 ///
 #define mySerial hV_HAL_Serial
 
+///
+/// @name Results
+/// @note Numbers are sequential and exclusive
+///
+/// @{
+#define RESULT_SUCCESS 0 ///< Success
+#define RESULT_ERROR 1 ///< Error
+/// @}
+///
+
+///
 /// @name General
 /// @{
 
@@ -110,10 +122,10 @@ void hV_HAL_begin();
 
 ///
 /// @brief General exit
-/// @param code default = 0 = success, otherwise error
+/// @param code default = `RESULT_SUCCESS` = `0` = success, otherwise error
 /// @note Only used on Linux
 ///
-void hV_HAL_exit(uint8_t code = 0);
+void hV_HAL_exit(uint8_t code = RESULT_SUCCESS);
 
 /// @}
 
@@ -302,7 +314,7 @@ void hV_HAL_Wire_end();
 /// @param[out] dataRead buffer to read
 /// @param[in] sizeRead number of bytes
 /// @param[in] us delay in microseconds, default = 0 = no delay
-/// @return uint8_t transmission status, RESULT_SUCCESS = 0 or RESULT_ERROR = 1
+/// @return uint8_t transmission status, `RESULT_SUCCESS` = `0` or `RESULT_ERROR` = `1`
 /// @note If sizeRead = 0, no read performed
 /// @warning No check for previous initialisation
 ///

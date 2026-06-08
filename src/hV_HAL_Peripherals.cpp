@@ -34,6 +34,8 @@
 // Release 911: Added overtime check on I²C write and read transfer
 // Release 922: Improved 3-wire SPI stability
 // Release 922: Ported to C
+// Release 1000: Updated to PDLS release 1000
+// Release 1001: Added delay on I²C write and read transfer
 //
 
 // Library header

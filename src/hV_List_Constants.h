@@ -54,16 +54,6 @@
 ///
 
 ///
-/// @name Results
-/// @note Numbers are sequential and exclusive
-///
-/// @{
-#define RESULT_SUCCESS 0 ///< Success
-#define RESULT_ERROR 1 ///< Error
-/// @}
-///
-
-///
 /// @name Orientation constants
 /// @note Numbers are sequential and exclusive
 /// @{
