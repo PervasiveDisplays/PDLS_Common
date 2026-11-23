@@ -5,8 +5,8 @@
 /// @details Project Pervasive Displays Library Suite
 /// @n Based on highView technology
 ///
-/// @date 21 Oct 2026
-/// @version 1011
+/// @date 21 Nov 2026
+/// @version 1012
 ///
 /// @copyright (c) Pervasive Displays Inc., 2021-2026
 /// @copyright (c) Etigues, 2010-2026
@@ -59,7 +59,7 @@
 ///
 /// @brief Release
 ///
-#define hV_HAL_PERIPHERALS_RELEASE 1011
+#define hV_HAL_PERIPHERALS_RELEASE 1012
 
 ///
 /// @brief SDK library

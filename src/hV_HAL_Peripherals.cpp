@@ -187,6 +187,13 @@ void hV_HAL_SPI_begin(uint32_t speed)
 
 #if defined(ENERGIA) // ENERGIA
 
+        // Energia SPI clock limit
+        if (_settingScreen.clock > 8000000)
+        {
+            _settingScreen.clock = 8000000;
+        }
+        // End of Energia SPI clock limit
+
         SPI.begin();
         SPI.setBitOrder(_settingScreen.bitOrder);
         SPI.setDataMode(_settingScreen.dataMode);
